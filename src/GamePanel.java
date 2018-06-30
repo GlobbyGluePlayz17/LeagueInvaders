@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,9 +11,17 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	Timer timer1;
+	
+	final int MENU_STATE = 0;
+	final int GAME_STATE = 1;
+	final int END_STATE = 2;
+	int currentState = MENU_STATE;
+	
+	Font titleFont;
 
 	GamePanel() {
 		timer1 = new Timer(1000/60, this);
+		titleFont = new Font("Arial", Font.PLAIN, 48);
 	}
 	
 	public void startGame() {
@@ -22,6 +32,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		repaint();
+		 if (currentState == MENU_STATE) {
+			 updateMenuState();
+		 } else if (currentState == GAME_STATE) {
+			updateGameState();
+		 } else if (currentState == END_STATE) {
+			updateEndState();
+		 }
 	}
 	
 	@Override
@@ -34,6 +51,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("tesser");
+		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+			if (currentState == 0) {
+				currentState = 1;
+			} else if (currentState == 1) {
+				currentState = 2;
+			} else if (currentState == 2) {
+				currentState = 0;
+			}
+		}
+			System.out.println(currentState);
 	}
 
 	@Override
@@ -43,8 +70,42 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	@Override
-
 	public void paintComponent(Graphics g){
-		  g.fillRect(10, 10, 100, 100);
+		 if (currentState == MENU_STATE) {
+			 drawMenuState(g);
+		 } else if (currentState == GAME_STATE) {
+			drawGameState(g);
+		 } else if (currentState == END_STATE) {
+			drawEndState(g);
+		 }
+	}
+	
+	public void updateMenuState() {
+		
+	}
+	
+	public void updateGameState() {
+		
+	}
+	
+	public void updateEndState() {
+		
+	}
+	
+	public void drawMenuState(Graphics g) {
+		g.setColor(Color.BLUE);
+		g.fillRect(0, 0, LeagueInvaders.Width, LeagueInvaders.Height);
+		g.setFont(titleFont);
+		g.drawString("TEXT", 10, 10);
+	}
+	
+	public void drawGameState(Graphics g) {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, LeagueInvaders.Width, LeagueInvaders.Height);
+	}
+	
+	public void drawEndState(Graphics g) {
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, LeagueInvaders.Width, LeagueInvaders.Height);
 	}
 }

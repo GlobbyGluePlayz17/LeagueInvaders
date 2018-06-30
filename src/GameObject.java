@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+import java.util.Random;
 
 public class GameObject {
 	int x;
@@ -10,10 +12,11 @@ public class GameObject {
 	}
 	
 	public void update() {
-		
+			x++;
+			y++;
 	}
 	
-	public void draw() {
-		//step 5 pt. 5
+	public void draw(Graphics g) {
+		 g.fillRect(x, y, 100, 100);
 	}
 }

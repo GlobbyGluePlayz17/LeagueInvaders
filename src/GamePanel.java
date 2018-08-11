@@ -20,12 +20,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	Font titleFont;
 	Font	 GameOverFont;
 	Rocketship rocket;
+	ObjectManager om;
 
 	GamePanel() {
 		timer1 = new Timer(1000/60, this);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		GameOverFont = new Font("Arial", Font.PLAIN, 48);
 		rocket = new Rocketship(250, 700, 50, 50);
+		om = new ObjectManager(rocket);
 	}
 	
 	public void startGame() {
@@ -67,14 +69,27 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 			System.out.println(currentState);
 		
 		if (e.getKeyCode()== KeyEvent.VK_LEFT) {
-			rocket.x+=rocket.speed;
-		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			rocket.x-=rocket.speed;
+			System.out.println("left");
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			rocket.x+=rocket.speed;
 		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			rocket.y+=rocket.speed;
-		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			rocket.y-=rocket.speed;
-		}
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			rocket.y+=rocket.speed;
+		} else if (e.getKeyCode() == KeyEvent.VK_UP + KeyEvent.VK_LEFT) {
+			rocket.x-=rocket.speed;
+			rocket.y-=rocket.speed;
+		} else if (e.getKeyCode() == KeyEvent.VK_UP + KeyEvent.VK_RIGHT) {
+			rocket.x+=rocket.speed;
+			rocket.y-=rocket.speed;
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN + KeyEvent.VK_LEFT) {
+			rocket.x-=rocket.speed;
+			rocket.y+=rocket.speed;
+		} else if (e.getKeyCode() == KeyEvent.VK_DOWN + KeyEvent.VK_RIGHT) {
+			rocket.x+=rocket.speed;
+			rocket.y+=rocket.speed;
+		} 
 	}
 
 	@Override
@@ -99,8 +114,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	}
 	
 	public void updateGameState() {
-		rocket.update();
-
+		om.update();
 	}
 	
 	public void updateEndState() {
@@ -118,8 +132,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	public void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, LeagueInvaders.Width, LeagueInvaders.Height);
-		
-		rocket.draw(g);
+		om.draw(g);
 	}
 	
 	public void drawEndState(Graphics g) {

@@ -10,7 +10,7 @@ public class Rocketship extends GameObject{
 
 	Rocketship(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		speed = 5;
+		speed = 10;
 		object = new GameObject(x, y, width, height);
 		// TODO Auto-generated constructor stub
 	}

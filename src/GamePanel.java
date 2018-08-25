@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		timer1 = new Timer(1000/60, this);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		GameOverFont = new Font("Arial", Font.PLAIN, 48);
-		rocket = new Rocketship(250, 700, 50, 50);
+		rocket = new Rocketship(220, 700, 50, 50);
 		om = new ObjectManager(rocket);
 	}
 	
@@ -90,6 +90,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 			rocket.x+=rocket.speed;
 			rocket.y+=rocket.speed;
 		} 
+		
+		if (e.getKeyCode()== KeyEvent.VK_SPACE) {
+			System.out.println("projectILE");
+			om.addProjectile(new Projectile(rocket.x, rocket.y, 10, 25));
+		}
 	}
 
 	@Override

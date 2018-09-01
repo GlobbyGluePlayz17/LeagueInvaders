@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.Random;
 
 public class GameObject {
@@ -7,6 +8,7 @@ public class GameObject {
 	int width;
 	int height;
 	boolean isAlive;
+	Rectangle collisionBox;
 	
 	GameObject(int x, int y, int width, int height) {
 		this.x=x;
@@ -14,10 +16,11 @@ public class GameObject {
 		this.width=width;
 		this.height = height;
 		boolean isAlive = true;
+		collisionBox = new Rectangle(x, y, width, height);
 	}
 	
 	public void update() {
-			
+			collisionBox.setBounds(x, y, width, height);
 	}
 	
 	public void draw(Graphics g) {

@@ -6,7 +6,6 @@ import javax.swing.Timer;
 public class Rocketship extends GameObject{
 	int speed;
 	GameObject object;
-	Timer timer2;
 
 	Rocketship(int x, int y, int width, int height) {
 		super(x, y, width, height);

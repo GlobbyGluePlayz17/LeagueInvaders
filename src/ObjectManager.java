@@ -8,12 +8,14 @@ public class ObjectManager {
 	ArrayList<Alien> listAlien;
 	long enemyTimer = 0;
 	int enemySpawnTime = 1000;
+	int score;
 	
 	
 	ObjectManager(Rocketship rocket) {
 		roc = rocket;
 		listProjectiles = new ArrayList<Projectile>();
 		listAlien = new ArrayList<Alien>();
+		score = 0;
 	}
 	
 	public void update() {
@@ -27,16 +29,18 @@ public class ObjectManager {
 	}
 	
 	public void draw(Graphics g) {
-		System.out.println(listProjectiles.size());
-		System.out.println(listAlien.size());
-		
 		for (int i = 0; i < listProjectiles.size(); i++) {
 			listProjectiles.get(i).draw(g);
 		}
 		for (int i = 0; i < listAlien.size(); i++) {
 			listAlien.get(i).draw(g);
+			System.out.println("asdf");
 		}
 		roc.draw(g);
+		
+		System.out.println(listProjectiles.size());
+		System.out.println(listAlien.size());
+		System.out.println(score);
 	}
 	
 	public void addProjectile(Projectile projectileADDList) {
@@ -58,23 +62,31 @@ public class ObjectManager {
 	public void purgeObjects() {
 			for (int i = 0; i < listAlien.size(); i++) {
 				if (listAlien.get(i).isAlive == false) {
-					listAlien.remove(listAlien.get(i));
+					listAlien.remove(i);
+					System.out.println("asdfasdf");
 				}
 			}
 	}
 	
+	
 	public void checkCollision() {
 		for(Alien a : listAlien){
 	        if(roc.collisionBox.intersects(a.collisionBox)){
-	                roc.isAlive = false;
+	               roc.isAlive = false;
 	        }
 		}
 		for (Projectile a : listProjectiles) {
 			for (int i = 0; i < listAlien.size(); i++) {
 				if (listAlien.get(i).collisionBox.intersects(a.collisionBox)) {
-					
+					listAlien.get(i).isAlive = false;
+					a.isAlive = false;
+					score++;
 				}
 			}
 		}
+	}
+	
+	public void scoreGetter() {
+		this.score = score;
 	}
 }

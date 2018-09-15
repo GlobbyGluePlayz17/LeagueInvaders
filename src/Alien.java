@@ -23,6 +23,6 @@ public class Alien extends GameObject {
 	public void draw(Graphics g) {
 		g.setColor(Color.MAGENTA);
 		g.fillRect(x, y, 30, 30);
-		System.out.println("weteg");
+		//System.out.println("weteg");
 	}
 }

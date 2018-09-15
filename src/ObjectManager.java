@@ -34,7 +34,7 @@ public class ObjectManager {
 		}
 		for (int i = 0; i < listAlien.size(); i++) {
 			listAlien.get(i).draw(g);
-			System.out.println("asdf");
+			//System.out.println("asdf");
 		}
 		roc.draw(g);
 		
@@ -63,15 +63,17 @@ public class ObjectManager {
 			for (int i = 0; i < listAlien.size(); i++) {
 				if (listAlien.get(i).isAlive == false) {
 					listAlien.remove(i);
-					System.out.println("asdfasdf");
+					//System.out.println("asdfasdf");
 				}
 			}
 	}
 	
 	
 	public void checkCollision() {
+		System.out.println("wiubtdc");
 		for(Alien a : listAlien){
 	        if(roc.collisionBox.intersects(a.collisionBox)){
+	        		System.out.println("847502");
 	               roc.isAlive = false;
 	        }
 		}
@@ -88,5 +90,6 @@ public class ObjectManager {
 	
 	public void scoreGetter() {
 		this.score = score;
+		System.out.println(score);
 	}
 }

@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	
 	Font titleFont;
 	Font	 GameOverFont;
+	Font SubFont;
 	Rocketship rocket;
 	ObjectManager om;
 
@@ -26,6 +27,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		timer1 = new Timer(1000/60, this);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		GameOverFont = new Font("Arial", Font.PLAIN, 48);
+		SubFont = new Font("Arial", Font.PLAIN, 30);
 		rocket = new Rocketship(220, 700, 50, 50);
 		om = new ObjectManager(rocket);
 	}
@@ -63,8 +65,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 			} else if (currentState == 1) {
 				currentState = 2;
 			} else if (currentState == 2) {
+				rocket = new Rocketship(220, 700, 50, 50);
+				om = new ObjectManager(rocket);
 				currentState = 0;
-			}
+			} 
 		}
 			System.out.println(currentState);
 		
@@ -123,9 +127,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		om.manageEnemies();
 		om.checkCollision();
 		om.purgeObjects();
-		//if (rocket.isAlive == false) {
-			//currentState = END_STATE;
-		//}
+		if (rocket.isAlive == false) {
+			currentState = END_STATE;
+		}
 	}
 	
 	public void updateEndState() {
@@ -137,7 +141,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		g.fillRect(0, 0, LeagueInvaders.Width, LeagueInvaders.Height);
 		g.setColor(Color.YELLOW);
 		g.setFont(titleFont);
-		g.drawString("LeagueInvaders", 80, 150);
+		g.drawString("LeagueInvaders", 78, 150);
+		g.setFont(SubFont);
+		g.drawString("Press ENTER to Play", 95, 350);
 	}
 	
 	public void drawGameState(Graphics g) {
@@ -152,5 +158,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		g.setColor(Color.YELLOW);
 		g.setFont(titleFont);
 		g.drawString("Game Over", 115, 150);
+		g.setFont(SubFont);
+		g.drawString("Press ENTER to Reset", 95, 350);
 	}
 }

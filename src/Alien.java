@@ -21,8 +21,7 @@ public class Alien extends GameObject {
 	}
 	
 	public void draw(Graphics g) {
-		g.setColor(Color.MAGENTA);
-		g.fillRect(x, y, 30, 30);
+		g.drawImage(GamePanel.alienImg, x, y, width, height, null);
 		//System.out.println("weteg");
 	}
 }
